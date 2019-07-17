@@ -30,6 +30,7 @@ class NegociacaoController {
 
         this.inicializaAPartirPatternProxyEFactoryMetodoArmadilhaSubstituto();
         this.inicializaECarregaMensageriaProxyEFactory();
+        this._service = new NegociacaoService();
     }
 
     inicializaAPartirPatternProxyEFactoryMetodoArmadilhaSubstituto() {
@@ -86,14 +87,14 @@ class NegociacaoController {
             this._mensagem.texto = 'Negociação adicionada com sucesso.';
 
             this._limpar();
-            
+
         } catch (error) {
             console.log(error);
             console.log(error.stack);
 
-            if(error instanceof DataInvalidException){
+            if (error instanceof DataInvalidException) {
                 this._mensagem.texto = error.message;
-            } else{
+            } else {
                 this._mensagem.texto = 'Um erro não esperado ocorreu. Entre em contato com o suporte.';
             }
         }
@@ -140,6 +141,26 @@ class NegociacaoController {
         this._inputValor.value = 0.0;
         // define o focus inicial no campo data
         this._inputData.focus();
+    }
+
+    importaNegociacoes() {
+        /* Construção de uma função callback (função que será chamada posteriormente);
+           Segue o padrão 'Error-First-Callback' para lidar com código assicrono:
+            #Caso 1 - a função que recebeu o callback não consiga executar sua operação, no primeiro parâmetro da callback recebe-se um erro, no segundo, NULL
+            #Caso 2 - a função que recebeu o callback consiga executar sua operalão, no primeiro parâmetro da callback recebe-se NULL, no segundo, os dados 
+                       resultantes da operação
+
+            Isto é, a partir da ausência ou não de um valor em err, lida-se com o sucesso ou o fracasso da operação.                       
+        */
+        this._service.obterNegociacoesDaSemana((errata, negociacoes) => {
+            if (errata) {
+                this._mensagem.texto = 'Não foi possível obter as negociações da semana.';
+                return;
+            }
+
+            negociacoes.forEach(negociacao => this._negociacoes.adiciona(negociacao));
+            this._mensagem.texto = 'Negociações importadas com sucesso.';
+        });
     }
 
 }
