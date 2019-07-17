@@ -11,7 +11,7 @@ var tbody = document.querySelector('table tbody');
 
 // função que cria uma tabela e adiciona itens a partir da inserção nos formulários
 document.querySelector('.form').
-addEventListener('submit', function (event) {
+addEventListener('submit', (event) =>{
     // cancelando a submissão do formulário
     event.preventDefault();
 
@@ -20,12 +20,12 @@ addEventListener('submit', function (event) {
     limpaCampos();
 });
 
-function criaLinhaTr() {
+function criaLinhaTr(){
     // cria um tr 
     var tr = document.createElement('tr');
 
     // iterando sobre a classe campos
-    this.campos.forEach(function (campo) {
+    this.campos.forEach((campo) =>{
         // cria uma td sem informações
         var td = document.createElement('td');
 

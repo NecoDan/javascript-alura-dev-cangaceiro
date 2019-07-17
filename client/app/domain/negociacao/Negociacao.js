@@ -1,21 +1,22 @@
-/* classe Negociacacao */
-
+// Classe Domínio Negociação
 class Negociacao {
 
-    constructor(data, quantidade, valor) {
-        /* Criando uma nova data, uma nova referência, para que o objeto data torne-se imutável.
-           Por meio da programação defensiva: retorna um novo objeto Date toda vez que o getter da data for acessado*/
-        this._data = new Date(this._data.getTime());
+    constructor(_data, _quantidade, _valor) {
+        Object.assign(this, {
+            _quantidade,
+            _valor
+        });
 
-        this._quantidade = quantidade;
-        this._valor = valor;
+        /* Criando uma nova data, uma nova referência, para que o objeto data torne-se imutável. 
+        Por meio da programação defensiva: retorna um novo objeto Date toda vez que o getter da data for acessado*/
+        this._data = new Date(_data.getTime()),
 
-        // congelando o objeto referenciando a ele mesmo, tornando o "imutável"
+        /* Congelando o objeto referenciando a ele mesmo, tornando o "imutável"*/
         Object.freeze(this);
     }
 
     /////////////////////////////// Getters
-    
+
     /* Criando uma nova data, uma nova referência, para que o objeto data torne-se imutável.
        Por meio da programação defensiva: retorna um novo objeto Date toda vez que o getter da data for acessado*/
     get data() {
@@ -38,4 +39,5 @@ class Negociacao {
     isCongelado() {
         return Object.isFrozen(this);
     }
+
 }

@@ -12,12 +12,15 @@
 <body class="container">
 
     <h1 class="text-center">Negociações</h1>
+    <div id="mensagemView">
+    </div>
 
     <form class="form">
 
         <div class="form-group">
             <label for="data">Data</label>
-            <input type="date" id="data" class="form-control" required autofocus />
+            <!-- <input type="date" id="data" class="form-control" required autofocus /> -->
+            <input type="text" id="data" class="form-control" required autofocus />
         </div>
 
         <div class="form-group">
@@ -43,50 +46,28 @@
     </div>
     <br>
     <br>
-
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>DATA</th>
-                <th>QUANTIDADE</th>
-                <th>VALOR</th>
-                <th>VOLUME</th>
-            </tr>
-        </thead>
-
-        <tbody>
-        </tbody>
-
-        <tfoot>
-        </tfoot>
-    </table>
-
-    <!-- <script src="app/index.js"></script> -->
+    <div id="negociacoes">
+    </div>
     <script src="app/domain/negociacao/Negociacao.js"></script>
+    <script src="app/domain/negociacao/Negociacoes.js"></script>
+    <script src="app/controllers/NegociacaoController.js"></script>
+    <script src="app/infraestrutura/util/DateUtil.js"></script>
+    <script src="app/infraestrutura/util/ProxyFactory.js"></script>
+    <script src="app/ui/views/Views.js"></script>
+    <script src="app/ui/views/NegociacoesView.js"></script>
+    <script src="app/infraestrutura/view/Mensagem.js"></script>
+    <script src="app/ui/views/MensagemView.js"></script>
+    <script src="app/infraestrutura/util/BindUtil.js"></script>
+    <script src="app/infraestrutura/exceptions/ApplicationException.js"></script>
+    <script src="app/infraestrutura/exceptions/DataInvalidException.js"></script>
+    <!--	app.js	agora	sempre	será	o	último	script	porque	ele	é	o	resp
+    onsável	em	instanciar	NegociacaoController	que	por	conseguinte	de
+    pende	de	outras	classes	-->
+    <script src="app/app.js"></script>
+    <!--	ControllerTestes.js	classe de testes -->
+    <script src="app/controllers/ControllerTestes.js"></script>
     <script>
-
-        var hoje = new Date();
-        var n1 = new Negociacao(hoje, 500, 550.00);
-        console.log(n1.data);
-        hoje.setDate(11);
-        console.log(n1.data);
-
-        // var n2 = new Negociacao(new Date(), 100, 25.00);
-        // console.log(n2);
-        // console.log("Quantidade = " + n2.quantidade);
-        // console.log("Valor = " + n2.valor);
-        // console.log("Data = " + n2.data);
-        // console.log("Volume = " + n2.volume);
-
-        // console.log(n2.data.getTime());
-
-        // n2.data.setDate(11);
-        // console.log(n2);
-        // console.log("Data = " + n2.data);
-
-
     </script>
-
 </body>
 
 </html>
